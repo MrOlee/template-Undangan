@@ -1,32 +1,48 @@
 AOS.init({ duration: 1000, once: true });
 const params = new URLSearchParams(window.location.search);
 
-// Ambil Data
-const p = params.get('p') || "Mempelai & Mempelai";
-const wa = params.get('wa') || "628123456789";
+// 1. Ambil Data Dasar
+const p = params.get('p') || "Ozi & Dina";
+const wa = params.get('wa') || "6282175939107";
 const themeNum = parseInt(params.get('c')) || 1;
 
-// Terapkan Data
 document.querySelectorAll('.pengantin-header').forEach(el => el.innerText = p);
 document.getElementById('tamu-display').innerText = params.get('to') || "Tamu Spesial";
 document.getElementById('tgl-lengkap').innerText = params.get('t') || "10 Maret 2026";
-document.querySelectorAll('.loc-display').forEach(el => el.innerText = params.get('l') || "Gedung Acara");
+document.querySelectorAll('.loc-display').forEach(el => el.innerText = params.get('l') || "Gedung USU");
 document.getElementById('bank-name').innerText = params.get('bank') || "MANDIRI";
 document.getElementById('norek').innerText = params.get('Norek') || params.get('norek') || "11223344";
-document.getElementById('an-bank').innerText = params.get('an') || p;
+document.getElementById('an-bank').innerText = params.get('an') || "Muhammad Fachrurrozi";
 
-// Ganti Warna Akses (Bukan Foto)
+// 2. Logika Warna (Hanya Aksen, Tidak Merusak Foto)
 const rotation = (themeNum - 1) * 12;
-document.documentElement.style.setProperty('--gold', `hsl(${40 + rotation}, 40%, 50%)`);
+document.documentElement.style.setProperty('--gold', `hsl(${40 + rotation}, 50%, 45%)`);
 
-// Muat Foto
+// 3. LOGIKA FOTO (ANTI ERROR)
 const imgParam = params.get('img');
 const container = document.getElementById('gallery-container');
-const images = imgParam ? imgParam.split(',') : ["https://picsum.photos/400/600?random=1"];
+
+// Link Foto Cadangan Jika Link dari User Rusak/Kosong
+const placeholderImg = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069";
+
+let images = [];
+if (imgParam && imgParam.includes('http')) {
+    images = imgParam.split(',');
+} else {
+    images = [placeholderImg, placeholderImg]; // Munculkan cadangan jika kosong
+}
+
+container.innerHTML = ""; 
 images.forEach(src => {
-    container.innerHTML += `<div class="gallery-item"><img src="${src.trim()}"></div>`;
+    if(src.trim() !== "") {
+        container.innerHTML += `
+            <div class="gallery-item" data-aos="zoom-in">
+                <img src="${src.trim()}" onerror="this.src='${placeholderImg}'">
+            </div>`;
+    }
 });
 
+// 4. Kontrol Aplikasi
 function startApp() {
     document.getElementById('overlay').style.opacity = '0';
     setTimeout(() => {
@@ -34,6 +50,11 @@ function startApp() {
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('bg-music').play();
     }, 1000);
+}
+
+function toggleAudio() {
+    const m = document.getElementById('bg-music');
+    m.paused ? m.play() : m.pause();
 }
 
 function sendRSVP() {
