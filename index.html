@@ -3,59 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Digital Profesional</title>
+    <title>The Wedding Of - Premium Invitation</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body id="body-theme">
+
     <div id="overlay">
-        <div class="content">
-            <p>Kepada Yth:</p>
-            <h2 id="tamu-buka">Nama Tamu</h2>
-            <p>Anda Diundang Dalam Pernikahan</p>
-            <h1 class="nama-pengantin">Pria & Wanita</h1>
-            <button class="btn-buka" onclick="mulaiUndangan()">Buka Undangan</button>
+        <div class="cover-content" data-aos="fade-up">
+            <p class="sub-title">WEDDING INVITATION</p>
+            <h1 class="font-serif pengantin-header">Mempelai & Mempelai</h1>
+            <div class="tamu-wrapper">
+                <p>Kepada Yth:</p>
+                <h2 id="tamu-display">Nama Tamu</h2>
+            </div>
+            <button class="btn-open" onclick="startApp()">Buka Undangan</button>
         </div>
     </div>
 
-    <div id="main-content">
-        <section class="hero">
-            <h1 class="nama-pengantin">Pria & Wanita</h1>
-            <p id="tgl-acara">Minggu, 12 Desember 2026</p>
-            <div id="countdown">00 Hari : 00 Jam</div>
-        </section>
-
-        <section class="acara">
-            <div class="card">
-                <h3>Akad Nikah</h3>
-                <p>08.00 - 10.00 WIB</p>
-                <p class="lokasi-teks">Gedung Pertemuan Umum</p>
-            </div>
-            <div class="card">
-                <h3>Resepsi</h3>
-                <p>11.00 - Selesai</p>
-                <p class="lokasi-teks">Gedung Pertemuan Umum</p>
+    <main id="main-content" style="display:none;">
+        <section class="hero-section">
+            <div class="hero-inner" data-aos="zoom-out" data-aos-duration="2000">
+                <p>The Wedding of</p>
+                <h1 class="font-serif pengantin-header">Mempelai & Mempelai</h1>
+                <p id="tgl-lengkap">12 . 12 . 2026</p>
             </div>
         </section>
 
-        <section class="buku-tamu">
-            <h3>Buku Tamu & Ucapan</h3>
-            <div class="card">
-                <input type="text" id="input-nama" placeholder="Nama Anda">
-                <textarea id="input-ucapan" placeholder="Tulis ucapan doa restu..."></textarea>
-                <button class="btn-wa" onclick="kirimWA()">Kirim Ucapan via WhatsApp</button>
+        <section class="countdown-section" data-aos="fade-up">
+            <h3 class="font-serif">Menuju Hari Bahagia</h3>
+            <div id="timer-box">
+                <div class="time-item"><span id="days">0</span><small>Hari</small></div>
+                <div class="time-item"><span id="hours">0</span><small>Jam</small></div>
+                <div class="time-item"><span id="minutes">0</span><small>Menit</small></div>
+            </div>
+        </section>
+
+        <section class="event-section">
+            <div class="container">
+                <div class="event-card" data-aos="fade-right">
+                    <h2 class="font-serif">Akad Nikah</h2>
+                    <p class="time">Pukul 09:00 WIB</p>
+                    <p class="loc-display">Lokasi Gedung</p>
+                </div>
+                <div class="event-card" data-aos="fade-left">
+                    <h2 class="font-serif">Resepsi</h2>
+                    <p class="time">Pukul 11:00 WIB - Selesai</p>
+                    <p class="loc-display">Lokasi Gedung</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <h2 class="font-serif" data-aos="fade-up">Our Gallery</h2>
+            <div class="gallery-grid" id="gallery-container">
+                </div>
+        </section>
+
+        <section class="gift-section" data-aos="fade-up">
+            <h2 class="font-serif">Wedding Gift</h2>
+            <div class="bank-card">
+                <p><strong id="bank-name">BANK BCA</strong></p>
+                <p id="norek" style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">1234567890</p>
+                <p>A/N <span id="an-bank">Mempelai</span></p>
+            </div>
+        </section>
+
+        <section class="wish-section">
+            <div class="container" data-aos="fade-up">
+                <h2 class="font-serif">Buku Tamu</h2>
+                <div class="form-container">
+                    <input type="text" id="sender-name" placeholder="Nama Lengkap">
+                    <textarea id="sender-msg" rows="4" placeholder="Tulis Doa & Ucapan..."></textarea>
+                    <button class="btn-send" onclick="sendWish()">Kirim via WhatsApp</button>
+                </div>
             </div>
         </section>
 
         <footer>
-            <p>Dibuat dengan ❤️ oleh Mr. Olee</p>
+            <p>Terima Kasih</p>
+            <h2 class="font-serif pengantin-header">Mempelai & Mempelai</h2>
         </footer>
-    </div>
+    </main>
 
-    <audio id="musik" loop>
+    <div id="audio-control" onclick="toggleAudio()">🎵</div>
+    <audio id="bg-music" loop>
         <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
     </audio>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
