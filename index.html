@@ -3,28 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan Digital</title>
+    <title>Undangan Digital Profesional</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body id="body-theme">
-    <div class="container">
-        <header>
-            <p class="sub-title">Walimatul 'Ursy</p>
-            <h1 id="mempelai">Nama Pengantin</h1>
-        </header>
-
-        <div class="card">
-            <p>Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-            <h2 id="tamu">Nama Tamu</h2>
-            <hr>
-            <div class="info">
-                <p><strong>Tanggal:</strong> <span id="tanggal">-- Januari 2026 --</span></p>
-                <p><strong>Lokasi:</strong> <span id="lokasi">-- Nama Tempat --</span></p>
-            </div>
-            <button class="btn" onclick="alert('Terima kasih telah membuka undangan!')">Buka Undangan</button>
+    <div id="overlay">
+        <div class="content">
+            <p>Kepada Yth:</p>
+            <h2 id="tamu-buka">Nama Tamu</h2>
+            <p>Anda Diundang Dalam Pernikahan</p>
+            <h1 class="nama-pengantin">Pria & Wanita</h1>
+            <button class="btn-buka" onclick="mulaiUndangan()">Buka Undangan</button>
         </div>
     </div>
+
+    <div id="main-content">
+        <section class="hero">
+            <h1 class="nama-pengantin">Pria & Wanita</h1>
+            <p id="tgl-acara">Minggu, 12 Desember 2026</p>
+            <div id="countdown">00 Hari : 00 Jam</div>
+        </section>
+
+        <section class="acara">
+            <div class="card">
+                <h3>Akad Nikah</h3>
+                <p>08.00 - 10.00 WIB</p>
+                <p class="lokasi-teks">Gedung Pertemuan Umum</p>
+            </div>
+            <div class="card">
+                <h3>Resepsi</h3>
+                <p>11.00 - Selesai</p>
+                <p class="lokasi-teks">Gedung Pertemuan Umum</p>
+            </div>
+        </section>
+
+        <section class="buku-tamu">
+            <h3>Buku Tamu & Ucapan</h3>
+            <div class="card">
+                <input type="text" id="input-nama" placeholder="Nama Anda">
+                <textarea id="input-ucapan" placeholder="Tulis ucapan doa restu..."></textarea>
+                <button class="btn-wa" onclick="kirimWA()">Kirim Ucapan via WhatsApp</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>Dibuat dengan ❤️ oleh Mr. Olee</p>
+        </footer>
+    </div>
+
+    <audio id="musik" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
