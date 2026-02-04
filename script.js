@@ -1,24 +1,35 @@
-// Ambil data dari URL
 const params = new URLSearchParams(window.location.search);
 
-// 1. Ambil Nama Pengantin (parameter 'p')
-const pengantin = params.get('p') || "Romeo & Juliet";
-document.getElementById('mempelai').innerText = pengantin;
-
-// 2. Ambil Nama Tamu (parameter 'to')
+// 1. Ambil Data URL
+const pengantin = params.get('p') || "Pria & Wanita";
 const tamu = params.get('to') || "Tamu Spesial";
-document.getElementById('tamu').innerText = tamu;
+const tgl = params.get('t') || "12 Desember 2026";
+const loc = params.get('l') || "Gedung Serbaguna";
+const wa = params.get('wa') || "628123456789"; // No WA Klien
 
-// 3. Ambil Tanggal (parameter 't')
-const tanggal = params.get('t') || "Waktu Belum Ditentukan";
-document.getElementById('tanggal').innerText = tanggal;
+// 2. Terapkan ke HTML
+document.querySelectorAll('.nama-pengantin').forEach(el => el.innerText = pengantin);
+document.getElementById('tamu-buka').innerText = tamu;
+document.getElementById('tgl-acara').innerText = tgl;
+document.querySelectorAll('.lokasi-teks').forEach(el => el.innerText = loc);
 
-// 4. Ambil Lokasi (parameter 'l')
-const lokasi = params.get('l') || "Lokasi Menyusul";
-document.getElementById('lokasi').innerText = lokasi;
+// 3. LOGIKA 30 KONSEP WARNA (Konsep 1 - 30)
+const konsep = parseInt(params.get('c')) || 1; 
+const rotasiWarna = (konsep - 1) * 12; // Memutar warna dasar sebesar 12 derajat per konsep
+document.getElementById('body-theme').style.filter = `hue-rotate(${rotasiWarna}deg)`;
 
-// 5. Ganti Tema Otomatis (parameter 'theme')
-const tema = params.get('theme'); // gold atau floral
-if (tema) {
-    document.getElementById('body-theme').classList.add(tema);
+// 4. Fungsi Mulai
+function mulaiUndangan() {
+    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    document.getElementById('musik').play();
+}
+
+// 5. Kirim WhatsApp
+function kirimWA() {
+    const nama = document.getElementById('input-nama').value;
+    const ucapan = document.getElementById('input-ucapan').value;
+    const teks = `Halo, saya ${nama}. Ingin mengucapkan: ${ucapan}`;
+    const urlWA = `https://wa.me/${wa}?text=${encodeURIComponent(teks)}`;
+    window.open(urlWA, '_blank');
 }
